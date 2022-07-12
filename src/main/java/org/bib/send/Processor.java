@@ -49,7 +49,7 @@ public class Processor extends EmailDataHolder{
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("olivaresmarkanthony14@outlook.com", "09095082474Oliy");
+                return new PasswordAuthentication("olivaresmarkanthony14@outlook.com", "");
             }
         });
         session.setDebug(true);

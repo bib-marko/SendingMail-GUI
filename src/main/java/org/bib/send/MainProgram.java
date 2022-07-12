@@ -25,13 +25,18 @@ public class MainProgram extends JFrame {
         txtFilename.setEditable(false);
 
         btnSend.addActionListener(e -> {
-            if(EmailDataHolder.validateFieldIfEmpty(new String[]{txtTO.getText(), txtCC.getText(), txtBCC.getText(), txtSubject.getText(), txtBody.getText(), txtFilename.getText()})){
-                new EmailDataHolder(txtTO.getText(), txtCC.getText(), txtBCC.getText(), txtSubject.getText(), txtBody.getText(), txtFilename.getText());
-                Processor.processMessage();
-                loadDefaults();
+            if(!(txtSubject.getText().equals("") || txtBody.getText().equals(""))){
+                if(EmailDataHolder.validateFieldIfEmpty(new String[]{txtTO.getText(), txtCC.getText(), txtBCC.getText(), txtFilename.getText()})){
+                    new EmailDataHolder(txtTO.getText(), txtCC.getText(), txtBCC.getText(), txtSubject.getText(), txtBody.getText(), txtFilename.getText());
+                    Processor.processMessage();
+                    loadDefaults();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Please fill out any of recipient type!", "Empty Recipient Field", JOptionPane.WARNING_MESSAGE);
+                }
             }else{
-                JOptionPane.showMessageDialog(this, "Please fill out any of recipient type!", "Empty Recipient Field", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please fill out Subject and Body!", "Ops!", JOptionPane.WARNING_MESSAGE);
             }
+
 
         });
 
@@ -49,11 +54,11 @@ public class MainProgram extends JFrame {
 
     private void attachFile() {
         JFileChooser fc = new JFileChooser();
-            int returnVal = fc.showOpenDialog(mainPanel);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fc.getSelectedFile();
-                String path = selectedFile.getAbsolutePath();
-                txtFilename.setText(path);
+        int returnVal = fc.showOpenDialog(mainPanel);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fc.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            txtFilename.setText(path);
         }
     }
 

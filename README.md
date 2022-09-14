@@ -1,3 +1,3 @@
 # mail-project
 
-TEST FISHEYE
+Sending Email using GUI
